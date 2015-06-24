@@ -57,7 +57,7 @@ requires more configuration files, like board files or a kernel configuration
 you have to mount them too using the `-v` flag.
 
 ```shell
-$ docker run --rm -ti --volumes-from buildroot_output -v $(pwd)/.defconfig:/root/buildroot/.defconfig orangetux/buildroot bash
+$ docker run --rm -ti --volumes-from buildroot_output -v $(pwd)/example/defconfig:/root/buildroot/defconfig orangetux/buildroot bash
 root@8211b942171e:~/buildroot# make defconfig BR2_DEFCONFIG=defconfig O=/buildroot_output
 [...]
 root@8211b942171e:~/buildroot# make menuconfig O=/buildroot_output
