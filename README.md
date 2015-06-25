@@ -1,5 +1,5 @@
 # Buildroot
-A Docker container for using [Buildroot][buildroot].
+A Docker image for using [Buildroot][buildroot].
 
 ## Get started
 To get started build the Docker image.
