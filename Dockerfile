@@ -15,8 +15,9 @@ RUN apt-get update && \
     gcc \
     git \
     gzip \
-    make \
     libncurses5-dev \
+    make \
+    mercurial \
     patch \
     perl \
     python \
