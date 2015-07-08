@@ -28,7 +28,7 @@ RUN apt-get update && \
     wget
 
 WORKDIR /root
-RUN git clone git://git.buildroot.net/buildroot 
+RUN git clone git://git.buildroot.net/buildroot --depth=1
 WORKDIR /root/buildroot
 
 RUN touch .config

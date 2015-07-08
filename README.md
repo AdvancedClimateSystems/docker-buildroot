@@ -1,5 +1,6 @@
 # Buildroot
-A Docker image for using [Buildroot][buildroot].
+A Docker image for using [Buildroot][buildroot]. It can be found on [Docker
+Hub][hub].
 
 ## Get started
 To get started build the Docker image.
@@ -75,4 +76,4 @@ $ docker run -ti --volumes-from buildroot_output -v $(pwd):/data orangetux/build
 
 [buildroot]:http://buildroot.uclibc.org/
 [data-only]:https://docs.docker.com/userguide/dockervolumes/
-[defconfig]:example/defconfig
+[hub]:https://registry.hub.docker.com/u/orangetux/buildroot/
