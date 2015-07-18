@@ -73,7 +73,11 @@ Again, copy the build product to your host and you are done.
 ```shell
 $ docker run -ti --volumes-from buildroot_output -v $(pwd):/data orangetux/buildroot cp -va /buildroot_output/images/rootfs.tar /data/
 ```
+## License
+This software is licensed under Mozzila Public License.
+&copy; 2015 Auke Willem Oosterhoff and [Advanced Climate Systems][acs].
 
+[acs]:http://advancedclimate.nl
 [buildroot]:http://buildroot.uclibc.org/
 [data-only]:https://docs.docker.com/userguide/dockervolumes/
 [hub]:https://registry.hub.docker.com/u/orangetux/buildroot/
