@@ -1,6 +1,7 @@
 FROM ubuntu:14.10
 MAINTAINER Auke Willem Oosterhoff <oosterhoff@baopt.nl>
 
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get install -y \
@@ -18,6 +19,7 @@ RUN apt-get update && \
     libncurses5-dev \
     make \
     mercurial \
+    whois \         
     patch \
     perl \
     python \
