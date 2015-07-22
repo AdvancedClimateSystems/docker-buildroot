@@ -6,14 +6,14 @@ Hub][hub].
 To get started build the Docker image.
 
 ``` shell
-$ docker build -t "orangetux/buildroot" .
+$ docker build -t "advancedclimatesystems/buildroot" .
 ```
 
 Create a [data-only container][data-only] to use as build and download
 cache and to store your build products. 
 
 ``` shell
-$ docker run -i --name buildroot_output orangetux/buildroot /bin/echo "Data only."
+$ docker run -i --name buildroot_output advancedclimatesystems/buildroot /bin/echo "Data only."
 ```
 
 This container has 2 volumes at `/root/buildroot/dl` and `/buildroot_output`. 
@@ -21,57 +21,56 @@ Buildroot downloads al data to the first volume, the last volume is used as
 build cache.
 
 ## Usage
-Now you can use can a Docker container to use buildroot. Make sure to set 
-output path to `/buildroot` by adding `O=/buildroot` to all you calls to
-`make`.
+A small script has been provided to make using the container a little easier.
+It's located at [scripts/run.sh][run.sh]. Instructions below show how
+to build a kernel for the Raspberry Pi using the a defconfig provided by
+Buildroot.
 
-Commands below build a root filesystem for the Raspberry Pi.
-
-```shell
-$ docker run --rm -ti --volumes-from buildroot_output orangetux/buildroot make raspberrypi_defconfig O=/buildroot_output
-$ docker run --rm -ti --volumes-from buildroot_output orangetux/buildroot make O=/buildroot_output
+``` shell
+.scripts/run.sh make raspberrypi2_defconfig menuconfig
+.scripts/run.sh make
 ```
-Now copy the root filesystem you just build from the data-only container to your disk:
 
-```shell
-$ docker run -ti --volumes-from buildroot_output -v $(pwd):/data orangetux/buildroot cp -va /buildroot_output/images/rootfs.tar /data/
-```
+Build products are stored inside the container at `/buildroot_output/images`.
+Because `run.sh` mounts the local folder `images/` at this place the
+build products are also stored on the host.  
 
 ## Build with existing config
-It is possible to let Buildroot build with an existing configuration. But it's
-not possible to mount a config at `/root/buildroot/.config`. Running `make`
-will  fail with:
+It is possible to build from a custom configuration. To demonstrate this, the
+repository contains a configuration to build a minimal root filesystem, around
+25 mb, with Python 2. This config is located at
+[external/configs/docker_python2_defconfig][docker_python2_defconfig].
 
-> Error while writing of the configuration.
-> Your configuration changes were NOT saved.
-
-The trick is to mount a defconfig in the container. Then in the container
-create `.config` from this defconfig, edit configuration using `menuconfig` and
-create a new defconfig from the updated `.config` file. Then run the build.
-The edits to your configuration will be saved on the host machine.
-
-A sample defconfig for the Raspberry Pi can be found at
-[example/defconfig][defconfig].
-
-Start the container and execute the commands as stated below. If your build
-requires more configuration files, like board files or a kernel configuration
-you have to mount them too using the `-v` flag.
+The `external/` directory contains a set of modifications for Buildroot. The
+modifications can be apllied with the environment variable `BR2_EXTERNAL`.
+Read [here][br2_external] more about customizations of Buildroot.
 
 ```shell
-$ docker run --rm -ti --volumes-from buildroot_output -v $(pwd)/example/defconfig:/root/buildroot/defconfig orangetux/buildroot bash
-root@8211b942171e:~/buildroot# make defconfig BR2_DEFCONFIG=defconfig O=/buildroot_output
-[...]
-root@8211b942171e:~/buildroot# make menuconfig O=/buildroot_output
-[...]
-root@8211b942171e:~/buildroot# make savedefconfig BR2_DEFCONFIG=defconfig O=/buildroot_output
-root@8211b942171e:~/buildroot# make O=/buildroot_output 
-[...]
+./scripts/run.sh make "BR2_EXTERNAL=/root/buildroot/external docker_python2_defconfig menuconfig"
+./scripts/run.sh make"
 ```
 
-Again, copy the build product to your host and you are done.
+If you've modified the configuration using `menuconfig` and you want to save
+those changes run:
 
 ```shell
-$ docker run -ti --volumes-from buildroot_output -v $(pwd):/data orangetux/buildroot cp -va /buildroot_output/images/rootfs.tar /data/
+./scripts/run.sh make BR2_DEFCONFIG=/root/buildroot/external/configs/docker_python2_defconfig savedefconfig
+```
+## Docker image from root fileystem
+If you've build a root filesystem for x86_64 it is very easy to import
+this filesystem in to Docker and build a minimal Docker image of it.
+
+The filesystem produced by Buildroot needs a few modifications to be able to
+imported in Docker. The modifications steps needed are in `scripts/fixup.sh`.
+This script is almost a copy of the script used in this [blog
+post][docker_blog] of Docker about creating lightweight Docker containers using
+Buildroot. 
+
+`script/fixup.sh` modifies `images/rootfs.tar`, creates an image `dietfs`
+from it and runs a container based on this image.
+
+```shell
+./scrips/fixup.sh images/rootfs.tar
 ```
 ## License
 This software is licensed under Mozzila Public License.
@@ -81,3 +80,7 @@ This software is licensed under Mozzila Public License.
 [buildroot]:http://buildroot.uclibc.org/
 [data-only]:https://docs.docker.com/userguide/dockervolumes/
 [hub]:https://registry.hub.docker.com/u/orangetux/buildroot/
+[run.sh]:scripts/run.sh
+[docker_python2_defconfig]:external/configs/docker_python2_defconfig
+[br2_external]:http://buildroot.uclibc.org/downloads/manual/manual.html#outside-br-custom
+[docker_blog]:https://blog.docker.com/2013/06/create-light-weight-docker-containers-buildroot/
