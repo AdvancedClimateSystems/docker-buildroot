@@ -27,8 +27,8 @@ to build a kernel for the Raspberry Pi using the a defconfig provided by
 Buildroot.
 
 ``` shell
-.scripts/run.sh make raspberrypi2_defconfig menuconfig
-.scripts/run.sh make
+$ ./scripts/run.sh make raspberrypi2_defconfig menuconfig
+$ ./scripts/run.sh make
 ```
 
 Build products are stored inside the container at `/buildroot_output/images`.
@@ -46,15 +46,15 @@ modifications can be apllied with the environment variable `BR2_EXTERNAL`.
 Read [here][br2_external] more about customizations of Buildroot.
 
 ```shell
-./scripts/run.sh make "BR2_EXTERNAL=/root/buildroot/external docker_python2_defconfig menuconfig"
-./scripts/run.sh make"
+$ ./scripts/run.sh make "BR2_EXTERNAL=/root/buildroot/external docker_python2_defconfig menuconfig"
+$ ./scripts/run.sh make
 ```
 
 If you've modified the configuration using `menuconfig` and you want to save
 those changes run:
 
 ```shell
-./scripts/run.sh make BR2_DEFCONFIG=/root/buildroot/external/configs/docker_python2_defconfig savedefconfig
+$ ./scripts/run.sh make BR2_DEFCONFIG=/root/buildroot/external/configs/docker_python2_defconfig savedefconfig
 ```
 ## Docker image from root fileystem
 If you've build a root filesystem for x86_64 it is very easy to import
@@ -70,7 +70,7 @@ Buildroot.
 from it and runs a container based on this image.
 
 ```shell
-./scrips/fixup.sh images/rootfs.tar
+$ ./scrips/fixup.sh images/rootfs.tar
 ```
 ## License
 This software is licensed under Mozzila Public License.
