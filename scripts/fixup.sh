@@ -3,10 +3,12 @@
 #
 # Almost a copy from script used in this post:
 # https://blog.docker.com/2013/06/create-light-weight-docker-containers-buildroot/
-[ -f $1 ] || { 
+set -e
+
+if [ "$#" -ne 1 ] || [ ! -f $1 ]; then  
     echo "Provide path to a root filesystem."
     exit 1
-}
+fi
 
 rm -rf /tmp/extra
 
