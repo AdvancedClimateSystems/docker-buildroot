@@ -29,6 +29,10 @@ RUN apt-get update && \
     unzip \
     wget
 
+# Sometimes Buildroot need proper locale, e.g. when using a toolchain
+# based on glibc.
+RUN locale-gen en_US.utf8
+
 WORKDIR /root
 RUN git clone git://git.buildroot.net/buildroot --depth=1
 WORKDIR /root/buildroot
