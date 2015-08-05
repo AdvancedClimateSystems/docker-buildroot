@@ -57,20 +57,12 @@ those changes run:
 $ ./scripts/run.sh make BR2_DEFCONFIG=/root/buildroot/external/configs/docker_python2_defconfig savedefconfig
 ```
 ## Docker image from root fileystem
-If you've build a root filesystem for x86_64 it is very easy to import
-this filesystem in to Docker and build a minimal Docker image of it.
-
-The filesystem produced by Buildroot needs a few modifications to be able to
-imported in Docker. The modifications steps needed are in `scripts/fixup.sh`.
-This script is almost a copy of the script used in this [blog
-post][docker_blog] of Docker about creating lightweight Docker containers using
-Buildroot. 
-
-`script/fixup.sh` modifies `images/rootfs.tar`, creates an image `dietfs`
-from it and runs a container based on this image.
+Import the root filesystem in to Docker to create an image run it and start
+a container.
 
 ```shell
-$ ./scrips/fixup.sh images/rootfs.tar
+$ docker import - dietfs < images/rootfs.tar
+$ docker run --rm -ti dietfs sh
 ```
 ## License
 This software is licensed under Mozzila Public License.
