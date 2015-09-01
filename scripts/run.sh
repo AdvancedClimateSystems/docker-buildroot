@@ -18,9 +18,10 @@
 # some products based on that config and save the config for future use. 
 # Your workflow will look something like this:
 # 
-# ./run.sh make docker_python2_defconfig menuconfig
-# ./run.sh make
+# ./run.sh make docker_python2_defconfig defconfig
+# ./run.sh make menuconfig
 # ./run.sh make BR2_DEFCONFIG=/root/buildroot/external/configs/docker_python2_defconfig savedefconfig
+# ./run.sh make
 set -e
 
 OUTPUT_DIR=/buildroot_output
@@ -29,7 +30,7 @@ BUILDROOT_DIR=/root/buildroot
 DOCKER_RUN="docker run 
     --rm 
     -ti 
-    --volumes-from buildroot_output
+    --volumes-from buildroot_docker_python2
     -v $(pwd)/data:$BUILDROOT_DIR/data
     -v $(pwd)/external:$BUILDROOT_DIR/external
     -v $(pwd)/rootfs_overlay:$BUILDROOT_DIR/rootfs_overlay
