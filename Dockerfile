@@ -1,5 +1,5 @@
 FROM ubuntu:14.10
-MAINTAINER Auke Willem Oosterhoff <oosterhoff@baopt.nl>
+MAINTAINER Auke Willem Oosterhoff <auke@orangetux.nl>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
