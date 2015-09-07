@@ -30,7 +30,7 @@ BUILDROOT_DIR=/root/buildroot
 DOCKER_RUN="docker run 
     --rm 
     -ti 
-    --volumes-from buildroot_docker_python2
+    --volumes-from buildroot_output
     -v $(pwd)/data:$BUILDROOT_DIR/data
     -v $(pwd)/external:$BUILDROOT_DIR/external
     -v $(pwd)/rootfs_overlay:$BUILDROOT_DIR/rootfs_overlay
