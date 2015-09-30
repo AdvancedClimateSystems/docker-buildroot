@@ -65,7 +65,7 @@ $ docker import - dietfs < images/rootfs.tar
 $ docker run --rm -ti dietfs sh
 ```
 ## License
-This software is licensed under Mozzila Public License.
+This software is licensed under Mozila Public License.
 &copy; 2015 Auke Willem Oosterhoff and [Advanced Climate Systems][acs].
 
 [acs]:http://advancedclimate.nl
