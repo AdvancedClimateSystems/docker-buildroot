@@ -1,4 +1,4 @@
-FROM ubuntu:14.10
+FROM ubuntu:16.04
 MAINTAINER Auke Willem Oosterhoff <auke@orangetux.nl>
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -19,7 +19,7 @@ RUN apt-get update && \
     libncurses5-dev \
     make \
     mercurial \
-    whois \         
+    whois \
     patch \
     perl \
     python \
