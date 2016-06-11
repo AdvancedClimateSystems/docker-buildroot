@@ -10,13 +10,13 @@ $ docker build -t "advancedclimatesystems/buildroot" .
 ```
 
 Create a [data-only container][data-only] to use as build and download
-cache and to store your build products. 
+cache and to store your build products.
 
 ``` shell
 $ docker run -i --name buildroot_output advancedclimatesystems/buildroot /bin/echo "Data only."
 ```
 
-This container has 2 volumes at `/root/buildroot/dl` and `/buildroot_output`. 
+This container has 2 volumes at `/root/buildroot/dl` and `/buildroot_output`.
 Buildroot downloads al data to the first volume, the last volume is used as
 build cache.
 
@@ -33,7 +33,7 @@ $ ./scripts/run.sh make
 
 Build products are stored inside the container at `/buildroot_output/images`.
 Because `run.sh` mounts the local folder `images/` at this place the
-build products are also stored on the host.  
+build products are also stored on the host.
 
 ## Build with existing config
 It is possible to build from a custom configuration. To demonstrate this, the
@@ -66,7 +66,7 @@ $ docker run --rm -ti dietfs sh
 ```
 ## License
 This software is licensed under Mozila Public License.
-&copy; 2015 Auke Willem Oosterhoff and [Advanced Climate Systems][acs].
+&copy; 2016 Auke Willem Oosterhoff and [Advanced Climate Systems][acs].
 
 [acs]:http://advancedclimate.nl
 [buildroot]:http://buildroot.uclibc.org/
