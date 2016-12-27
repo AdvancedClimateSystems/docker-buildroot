@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:17.04
 MAINTAINER Auke Willem Oosterhoff <auke@orangetux.nl>
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -32,14 +32,16 @@ RUN apt-get update && \
 # Sometimes Buildroot need proper locale, e.g. when using a toolchain
 # based on glibc.
 RUN locale-gen en_US.utf8
+RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2016.11 /root/buildroot
 
-WORKDIR /root
-RUN git clone git://git.buildroot.net/buildroot --depth=1
 WORKDIR /root/buildroot
+
+ENV O=/buildroot_output
 
 RUN touch .config
 RUN touch kernel.config
+
 VOLUME /root/buildroot/dl
 VOLUME /buildroot_output
 
-CMD ["/bin/bash"]
+RUN ["/bin/bash"]
