@@ -18,7 +18,7 @@ $ docker run -i --name buildroot_output advancedclimatesystems/buildroot /bin/ec
 
 This container has 2 volumes at `/root/buildroot/dl` and `/buildroot_output`.
 Buildroot downloads al data to the first volume, the last volume is used as
-build cache.
+build cache, cross compiler and build results.
 
 ## Usage
 A small script has been provided to make using the container a little easier.
@@ -66,12 +66,12 @@ $ docker run --rm -ti dietfs sh
 ```
 ## License
 This software is licensed under Mozila Public License.
-&copy; 2016 Auke Willem Oosterhoff and [Advanced Climate Systems][acs].
+&copy; 2017 Auke Willem Oosterhoff and [Advanced Climate Systems][acs].
 
 [acs]:http://advancedclimate.nl
 [buildroot]:http://buildroot.uclibc.org/
 [data-only]:https://docs.docker.com/userguide/dockervolumes/
-[hub]:https://registry.hub.docker.com/u/orangetux/buildroot/
+[hub]:https://hub.docker.com/r/advancedclimatesystems/docker-buildroot/builds/
 [run.sh]:scripts/run.sh
 [docker_python2_defconfig]:external/configs/docker_python2_defconfig
 [br2_external]:http://buildroot.uclibc.org/downloads/manual/manual.html#outside-br-custom
