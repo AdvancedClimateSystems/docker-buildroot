@@ -33,7 +33,7 @@ RUN apt-get update && \
 # Sometimes Buildroot need proper locale, e.g. when using a toolchain
 # based on glibc.
 RUN locale-gen en_US.utf8
-RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2017.02.2 /root/buildroot
+RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2017.02.3 /root/buildroot
 
 WORKDIR /root/buildroot
 
