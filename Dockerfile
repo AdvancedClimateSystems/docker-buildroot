@@ -16,6 +16,7 @@ RUN apt-get update && \
     gcc \
     git \
     gzip \
+    locales \
     libncurses5-dev \
     make \
     mercurial \
@@ -32,7 +33,8 @@ RUN apt-get update && \
 # Sometimes Buildroot need proper locale, e.g. when using a toolchain
 # based on glibc.
 RUN locale-gen en_US.utf8
-RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2016.11.2 /root/buildroot
+
+RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2017.05 /root/buildroot
 
 WORKDIR /root/buildroot
 
