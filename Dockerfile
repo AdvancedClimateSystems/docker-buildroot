@@ -1,4 +1,4 @@
-FROM ubuntu:17.04
+FROM ubuntu:18.04
 MAINTAINER Auke Willem Oosterhoff <auke@orangetux.nl>
 
 ENV DEBIAN_FRONTEND=noninteractive
