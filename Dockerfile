@@ -41,7 +41,7 @@ RUN apt-get update && \
 # based on glibc.
 RUN locale-gen en_US.utf8
 
-RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2018.08.1 /root/buildroot
+RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2018.11 /root/buildroot
 
 WORKDIR /root/buildroot
 
