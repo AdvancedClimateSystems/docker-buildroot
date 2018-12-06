@@ -18,6 +18,8 @@ RUN apt-get update && \
     gzip \
     locales \
     libncurses5-dev \
+    libdevmapper-dev \
+    libsystemd-dev \
     make \
     mercurial \
     whois \
@@ -27,14 +29,19 @@ RUN apt-get update && \
     rsync \
     sed \
     tar \
+    vim \ 
     unzip \
-    wget
+    wget \
+    bison \
+    flex \
+    libssl-dev \
+    libfdt-dev
 
 # Sometimes Buildroot need proper locale, e.g. when using a toolchain
 # based on glibc.
 RUN locale-gen en_US.utf8
 
-RUN git clone git://git.buildroot.net/buildroot --depth=1 /root/buildroot
+RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2018.08.1 /root/buildroot
 
 WORKDIR /root/buildroot
 
