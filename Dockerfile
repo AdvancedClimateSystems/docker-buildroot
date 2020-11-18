@@ -1,5 +1,4 @@
 FROM ubuntu:18.04
-MAINTAINER Auke Willem Oosterhoff <auke@orangetux.nl>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -41,7 +40,7 @@ RUN apt-get update && \
 # based on glibc.
 RUN locale-gen en_US.utf8
 
-RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2018.11 /root/buildroot
+RUN git clone git://git.buildroot.net/buildroot --depth=1 --branch=2019.05 /root/buildroot
 
 WORKDIR /root/buildroot
 
