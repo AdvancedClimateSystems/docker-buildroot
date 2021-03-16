@@ -41,6 +41,7 @@ make() {
     echo "make O=$OUTPUT_DIR"
 }
 
+echo $DOCKER_RUN
 if [ "$1" == "make" ]; then
     eval $DOCKER_RUN $(make) ${@:2}
 else
