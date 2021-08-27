@@ -20,6 +20,11 @@ This container has 2 volumes at `/root/buildroot/dl` and `/buildroot_output`.
 Buildroot downloads al data to the first volume, the last volume is used as
 build cache, cross compiler and build results.
 
+To build the Docker image for AT91 run
+```
+$ docker build -f Dockerfile-at91 -t "advancedclimatesystems/docker-buildroot:v2021.02-at91 ."
+```
+
 ## Usage
 A small script has been provided to make using the container a little easier.
 It's located at [scripts/run.sh][run.sh]. Instructions below show how
